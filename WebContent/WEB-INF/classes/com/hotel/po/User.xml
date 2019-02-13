@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hotel.po.User">
+	<insert id="addUser" parameterType="User">
+		INSERT INTO user (u_username,u_password,u_name,u_idcard,u_tel,u_date) 
+			VALUES(#{u_username},#{u_password},#{u_name},#{u_idcard},#{u_tel},#{u_date})
+	</insert>
+
+	<select id="qByUsername" resultType="User">
+		SELECT * FROM user WHERE u_username = #{u_username}
+	</select>
+	
+	<select id="qByName" resultType="User">
+		SELECT * FROM user WHERE u_name = #{u_name}
+	</select>
+	
+	<select id="qByTel" resultType="User">
+		SELECT * FROM user WHERE u_tel = #{u_tel}
+	</select>
+
+	<select id="qAdByUsername" resultType="Admin">
+		SELECT * FROM admin WHERE ad_username = #{ad_username}
+	</select>
+	
+	<select id="qAllUser" resultType="User">
+		SELECT * FROM user
+	</select>
+	
+	<update id="updateUser" parameterType="User">
+		UPDATE user SET u_id = #{u_id}
+		<if test="u_username!=null">,u_username=#{u_username}</if>
+		<if test="u_password!=null">,u_password=#{u_password}</if>
+		<if test="u_name!=null">,u_name=#{u_name}</if>
+		<if test="u_idcard!=null">,u_idcard=#{u_idcard}</if>
+		<if test="u_tel!=null">,u_tel=#{u_tel}</if>
+		WHERE u_id = #{u_id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="Integer">
+		DELETE FROM user WHERE u_id = #{u_id}
+	</delete>
+	
+	<select id="qAllAdmin" resultType="Admin">
+		SELECT * FROM admin
+	</select>
+	
+	<insert id="addAdmin" parameterType="Admin">
+		INSERT INTO admin (ad_username,ad_password,ad_name,ad_tel,ad_pow,ad_date) 
+			VALUES(#{ad_username},#{ad_password},#{ad_name},#{ad_tel},#{ad_pow},#{ad_date})
+	</insert>
+	
+	<delete id="deleteAdmin" parameterType="Integer">
+		DELETE FROM admin WHERE ad_id = #{ad_id}
+	</delete>
+	
+	<update id="updateAdmin" parameterType="Admin">
+		UPDATE admin SET ad_id = #{ad_id}
+		<if test="ad_username!=null">,ad_username=#{ad_username}</if>
+		<if test="ad_password!=null">,ad_password=#{ad_password}</if>
+		<if test="ad_name!=null">,ad_name=#{ad_name}</if>
+		<if test="ad_tel!=null">,ad_tel=#{ad_tel}</if>
+		<if test="ad_pow!=null">,ad_pow=#{ad_pow}</if>
+		WHERE ad_id = #{ad_id}
+	</update>
+	
+</mapper>
